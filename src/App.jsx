@@ -1,18 +1,29 @@
+import { useState } from "react";
 import { Layout } from './components/layout/component';
 import { restaurants } from "../materials/mock"
 import { Restaurant } from './components/restaurant/component'
+import { Button } from './components/./button/component';
 
 export const App = () => {
+  const [currentRestaurantNumber, setcurrentRestaurantNumber] = useState(0);
+
   return (
     <Layout>
-      {restaurants.map((restaurant) => (
-        <Restaurant
-          key={restaurant.id}
-          restaurant_name={restaurant.name}
-          menu={restaurant.menu}
-          reviews={restaurant.reviews}
-        />
+      {restaurants.map((restaurant, index) => (
+        <div>
+          <Button onClick={() => {
+            setcurrentRestaurantNumber(index);
+          }}>
+            {restaurant.name}
+          </Button>
+        </div>
       ))}
+      <Restaurant
+        key={restaurants[currentRestaurantNumber].id}
+        restaurant_name={restaurants[currentRestaurantNumber].name}
+        menu={restaurants[currentRestaurantNumber].menu}
+        reviews={restaurants[currentRestaurantNumber].reviews}
+      />
     </Layout>
   );
 };
