@@ -18,11 +18,9 @@ export const App = () => {
           </Button>
         </div>
       ))}
-      <Restaurant
+      <Restaurant 
         key={restaurants[currentRestaurantNumber].id}
-        restaurant_name={restaurants[currentRestaurantNumber].name}
-        menu={restaurants[currentRestaurantNumber].menu}
-        reviews={restaurants[currentRestaurantNumber].reviews}
+        restaurant={restaurants[currentRestaurantNumber]}
       />
     </Layout>
   );
