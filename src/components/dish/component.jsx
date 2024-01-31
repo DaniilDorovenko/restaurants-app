@@ -22,7 +22,6 @@ export const Dish = ({ dish }) => {
             <Button onClick={() => {
                 if (count < 5) {
                     setCount(count + 1);
-                    setMinusDisabled(false);
                 };
             }
             } disabled={count === 5}>+</Button>
