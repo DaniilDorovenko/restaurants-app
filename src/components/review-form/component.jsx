@@ -25,7 +25,13 @@ function reducer(state, action) {
     throw Error('Unknown action: ' + action.type);
 }
 
-const initialState = { name: 'Your Name', text: 'Your review', rating: 10 };
+const initialState = {
+    name: '',
+    name_placeholder: 'Your Name',
+    text: '',
+    text_placeholder: 'Your review',
+    rating: 10
+};
 
 export const ReviewForm = ({ reviews }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -33,7 +39,7 @@ export const ReviewForm = ({ reviews }) => {
     function handleNameInputChange(event) {
         dispatch({
             type: 'changed_name',
-            nextName: event.target.value
+            name: event.target.value
 
         });
     }
@@ -41,14 +47,14 @@ export const ReviewForm = ({ reviews }) => {
     function handleTextInputChange(event) {
         dispatch({
             type: 'changed_text',
-            nextName: event.target.value
+            text: event.target.value
         });
     }
 
     function handleRatingInputChange(event) {
         dispatch({
             type: 'changed_rating',
-            nextName: event.target.value
+            rating: event.target.value
         });
     }
 
@@ -57,12 +63,14 @@ export const ReviewForm = ({ reviews }) => {
             <input
                 id="name"
                 type='text'
+                placeholder={state.name_placeholder}
                 value={state.name}
                 onChange={handleNameInputChange}
             />
             <input
                 id="text"
                 type='text'
+                placeholder={state.text_placeholder}
                 value={state.text}
                 onChange={handleTextInputChange}
             />
@@ -74,6 +82,7 @@ export const ReviewForm = ({ reviews }) => {
                 max='10'
                 onChange={handleRatingInputChange}
             />
+            <label htmlFor="rating">{state.rating}</label>
         </div>
     )
 };
