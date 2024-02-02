@@ -27,14 +27,14 @@ function reducer(state, action) {
 
 const initialState = {
     name: '',
-    name_placeholder: 'Your Name',
     text: '',
-    text_placeholder: 'Your review',
-    rating: 10
+    rating: 10,
 };
 
-export const ReviewForm = ({ reviews }) => {
+export const ReviewForm = ({placeholders}) => {
     const [state, dispatch] = useReducer(reducer, initialState);
+    const name_placeholder = 'Your Name';
+    const text_placeholder = 'Your review';
 
     function handleNameInputChange(event) {
         dispatch({
@@ -63,14 +63,14 @@ export const ReviewForm = ({ reviews }) => {
             <input
                 id="name"
                 type='text'
-                placeholder={state.name_placeholder}
+                placeholder={name_placeholder}
                 value={state.name}
                 onChange={handleNameInputChange}
             />
             <input
                 id="text"
                 type='text'
-                placeholder={state.text_placeholder}
+                placeholder={text_placeholder}
                 value={state.text}
                 onChange={handleTextInputChange}
             />
