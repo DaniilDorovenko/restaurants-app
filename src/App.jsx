@@ -10,7 +10,7 @@ export const App = () => {
   return (
     <Layout>
       {restaurants.map((restaurant, index) => (
-        <div>
+        <div key={index}>
           <Button onClick={() => {
             setcurrentRestaurantNumber(index);
           }}>
@@ -18,10 +18,7 @@ export const App = () => {
           </Button>
         </div>
       ))}
-      <Restaurant 
-        key={restaurants[currentRestaurantNumber].id}
-        restaurant={restaurants[currentRestaurantNumber]}
-      />
+      <Restaurant restaurant={restaurants[currentRestaurantNumber]}/>
     </Layout>
   );
 };
