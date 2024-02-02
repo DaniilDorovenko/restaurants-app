@@ -31,7 +31,7 @@ const initialState = {
     rating: 10,
 };
 
-export const ReviewForm = ({placeholders}) => {
+export const ReviewForm = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const name_placeholder = 'Your Name';
     const text_placeholder = 'Your review';
