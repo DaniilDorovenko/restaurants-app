@@ -5,7 +5,8 @@ import { ReviewForm } from '../review-form/component';
 import { UserContext } from "../contexts/user";
 
 export const Restaurant = ({ restaurant }) => {
-    const value = useContext(UserContext);
+    // const {user} = useContext(UserContext);
+    // console.log(user);
     return (
         <div>
             <h1>{restaurant.name}</h1>
