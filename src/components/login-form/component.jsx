@@ -2,8 +2,10 @@
 import { useReducer } from 'react';
 import { useContext } from "react";
 import { UserContext } from "../contexts/user";
+import { Button } from '../button/component';
 
 function reducer(state, action) {
+
     switch (action.type) {
         case 'changed_name': {
             return {
@@ -11,16 +13,16 @@ function reducer(state, action) {
                 name: action.name,
             };
         }
-        case 'changed_text': {
+        case 'changed_email': {
             return {
                 ...state,
-                text: action.text,
+                email: action.email,
             };
         }
-        case 'changed_rating': {
+        case 'pressed_clear': {
             return {
-                ...state,
-                rating: action.rating,
+                name: '',
+                email: '',
             };
         }
     }
@@ -28,18 +30,17 @@ function reducer(state, action) {
 }
 
 
-export const ReviewForm = () => {
-    const {user} = useContext(UserContext);
+export const LoginForm = () => {
+    const { setUser, user } = useContext(UserContext);
 
     const initialState = {
-        name: user.name||'',
-        text: '',
-        rating: 10,
+        name: user.name || '',
+        email: '',
     };
 
     const [state, dispatch] = useReducer(reducer, initialState);
     const name_placeholder = 'Your Name';
-    const text_placeholder = 'Your review';
+    const email_placeholder = 'Your email';
 
     function handleNameInputChange(event) {
         dispatch({
@@ -49,17 +50,24 @@ export const ReviewForm = () => {
         });
     }
 
-    function handleTextInputChange(event) {
+    function handleEmailInputChange(event) {
         dispatch({
-            type: 'changed_text',
+            type: 'changed_email',
             text: event.target.value
         });
     }
 
-    function handleRatingInputChange(event) {
+    function handleSubmitButton(event) {
+        setUser({
+            name: state.name,
+            email: state.email
+        })
+    }
+
+    function handleClearButton(event) {
         dispatch({
-            type: 'changed_rating',
-            rating: event.target.value
+            type: 'pressed_clear',
+            text: event.target.value
         });
     }
 
@@ -73,21 +81,20 @@ export const ReviewForm = () => {
                 onChange={handleNameInputChange}
             />
             <input
-                id="text"
-                type='text'
-                placeholder={text_placeholder}
-                value={state.text}
-                onChange={handleTextInputChange}
+                id="email"
+                type='email'
+                placeholder={email_placeholder}
+                value={state.email}
+                onChange={handleEmailInputChange}
             />
-            <input
-                id="rating"
-                type='range'
-                value={state.rating}
-                min='0'
-                max='10'
-                onChange={handleRatingInputChange}
-            />
-            <label htmlFor="rating">{state.rating}</label>
+            <Button
+                onClick={handleSubmitButton}>
+                Submit
+            </Button>
+            <Button
+                onClick={handleClearButton}>
+                Clear
+            </Button>
         </div>
     )
 };
