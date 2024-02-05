@@ -1,5 +1,7 @@
 
 import { useReducer } from 'react';
+import { useContext } from "react";
+import { UserContext } from "../contexts/user";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -25,13 +27,16 @@ function reducer(state, action) {
     throw Error('Unknown action: ' + action.type);
 }
 
-const initialState = {
-    name: '',
-    text: '',
-    rating: 10,
-};
 
 export const ReviewForm = () => {
+    const {user} = useContext(UserContext);
+
+    const initialState = {
+        name: user.name||'',
+        text: '',
+        rating: 10,
+    };
+
     const [state, dispatch] = useReducer(reducer, initialState);
     const name_placeholder = 'Your Name';
     const text_placeholder = 'Your review';

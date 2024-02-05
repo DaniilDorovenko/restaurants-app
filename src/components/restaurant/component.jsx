@@ -5,14 +5,13 @@ import { ReviewForm } from '../review-form/component';
 import { UserContext } from "../contexts/user";
 
 export const Restaurant = ({ restaurant }) => {
-    // const {user} = useContext(UserContext);
-    // console.log(user);
+    const {user} = useContext(UserContext);
     return (
         <div>
             <h1>{restaurant.name}</h1>
             <Menu menu={restaurant.menu} />
             <Reviews reviews={restaurant.reviews} />
-            <ReviewForm />
+            {user.name?<ReviewForm user={user}/>:''}         
         </div>
     )
 };
