@@ -1,28 +1,24 @@
 import { useState } from "react";
+import { store } from "./redux";
+import { Provider, useSelector } from "react-redux";
+
 import { Layout } from './components/layout/component';
-import { restaurants } from "../materials/mock"
 import { Restaurant } from './components/restaurant/component'
-import { Button } from './components/button/component';
 import { UserContext } from "./components/contexts/user";
+import { Tabs } from "./components/tabs/component";
 
 export const App = () => {
-  const [currentRestaurantNumber, setcurrentRestaurantNumber] = useState(0);
+  const [currentRestaurantId, setcurrentRestaurantId] = useState();
   const [user, setUser] = useState({ name: '', email: '' });
-
+  
   return (
-    <UserContext.Provider value={{user, setUser}}>
-      <Layout>
-        {restaurants.map((restaurant, index) => (
-          <div key={index}>
-            <Button onClick={() => {
-              setcurrentRestaurantNumber(index);
-            }}>
-              {restaurant.name}
-            </Button>
-          </div>
-        ))}
-        <Restaurant restaurant={restaurants[currentRestaurantNumber]} />
-      </Layout>
-    </UserContext.Provider>
+    <Provider store={store}>
+      <UserContext.Provider value={{ user, setUser }}>
+        <Layout>
+        <Tabs onSelect={setcurrentRestaurantId} />
+         { currentRestaurantId && <Restaurant restaurantId={currentRestaurantId} />}
+        </Layout>
+      </UserContext.Provider>
+    </Provider>
   );
 };
