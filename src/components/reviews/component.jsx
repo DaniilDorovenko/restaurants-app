@@ -1,13 +1,14 @@
+import { Review } from "../review/component";
+
 export const Reviews = ({ reviews }) => {
     return (
         <div>
             <h3>Reviews</h3>
             <ul>
-                {reviews.map((item) => (
-                    <li key={item.id}>
-                        {item.user}
-                        {item.text}
-                        {item.rating}
+                {reviews.map((reviewId) => (
+                    <li key={'r' + reviewId}>
+                        <Review reviewId={reviewId}/>
+                       
                     </li>
                 ))}
             </ul>
