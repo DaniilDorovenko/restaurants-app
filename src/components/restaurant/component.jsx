@@ -6,12 +6,12 @@ import { Reviews } from '../reviews/component';
 import { ReviewForm } from '../review-form/component';
 import { UserContext } from "../contexts/user";
 import { selectRestaurantById } from "../../redux/entities/restaurant/selectors";
-import { selectDishIds } from "../../redux/entities/dish/selectors";
+// import { selectDishIds } from "../../redux/entities/dish/selectors";
 
 export const Restaurant = ({ restaurantId }) => {
     const {user} = useContext(UserContext);
     const restaurant = useSelector((state) => selectRestaurantById(state, restaurantId));
-    const dishIds = useSelector(selectDishIds);
+    // const dishIds = useSelector(selectDishIds);
     
     return (
         <div>
