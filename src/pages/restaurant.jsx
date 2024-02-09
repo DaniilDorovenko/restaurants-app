@@ -6,10 +6,11 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRestaurants } from "../redux/entities/restaurant/thunks/get-restaurants";
 import { selectIsLoading } from '../redux/ui/requset';
+import { selectRestaurantIds } from "../redux/entities/restaurant/selectors";
 
 export const RestaurantPage = () => {
     const [currentRestaurantId, setCurrentRestaurantId] = useState();
-
+    
     const [requestId, setRequestId] = useState();
 
     const isLoading = useSelector(
@@ -27,7 +28,7 @@ export const RestaurantPage = () => {
         ) : (
             <>
                 <Tabs onSelect={setCurrentRestaurantId} />
-                {/* <Restaurant restaurantId={currentRestaurantId} /> */}
+                {currentRestaurantId && <Restaurant restaurantId={currentRestaurantId} />}
             </>
         )}
         </Layout>

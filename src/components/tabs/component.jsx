@@ -4,7 +4,6 @@ import { Tab } from "../tab/component";
 
 export const Tabs = ({ onSelect }) => {
     const restaurantIds = useSelector(selectRestaurantIds);
-    console.log('tabs') //Array(0)
 
     return (
         <>
