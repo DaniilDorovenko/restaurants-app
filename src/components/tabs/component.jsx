@@ -8,7 +8,7 @@ export const Tabs = ({ onSelect }) => {
     return (
         <>
             {restaurantIds.map((id) => (
-                <Tab id={id} onClick={() => onSelect(id)} ></Tab>
+                <Tab key={id} id={id} onClick={() => onSelect(id)} ></Tab>
             ))
             }</>
 
