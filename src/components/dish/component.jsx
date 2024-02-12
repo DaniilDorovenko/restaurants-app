@@ -1,14 +1,14 @@
-import { Button } from '../button/component';
-import { selectDishById } from "../../redux/entities/dish/selectors";
-
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { Button } from '../button/component';
+
+import { selectDishById } from "../../redux/entities/dish/selectors";
 import { selectIsLoading } from '../../redux/ui/requset';
+import { getDishById } from "../../redux/entities/dish/thunks/get-dishes";
 
 import classNames from "classnames";
 import styles from "./styles.module.scss"
-import { getDishById } from "../../redux/entities/dish/thunks/get-dishes";
-
 
 export const Dish = ({ dishId }) => {
     const [count, setCount] = useState();
