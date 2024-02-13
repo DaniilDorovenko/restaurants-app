@@ -20,18 +20,17 @@ export const Reviews = ({ restaurantId }) => {
     }, [dispatch, restaurantId]);
 
     const reviews = useSelector(selectRestaurantReviewIds(restaurantId));
-    console.log(reviews)
 
     return (
         <div>
             <h3>Reviews</h3>
             <ul>
-                {/* {reviews.map((reviewId) => (
+                {reviews.map((reviewId) => (
                     <li key={'r' + reviewId}>
                         <Review reviewId={reviewId}/>
                        
                     </li>
-                ))} */}
+                ))}
             </ul>
         </div>
     )

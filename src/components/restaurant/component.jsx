@@ -9,14 +9,13 @@ import { selectRestaurantById } from "../../redux/entities/restaurant/selectors"
 
 export const Restaurant = ({ restaurantId }) => {
     const {user} = useContext(UserContext);
-    const restaurant = useSelector((state) => selectRestaurantById(state, restaurantId));
+    const restaurant = useSelector(selectRestaurantById(restaurantId));
     
     return (
         <div>
             <h1>{restaurant.name}</h1>
             <Menu menu={restaurant.menu} />
-            {/* <Reviews reviews={restaurant.reviews} /> */}
-            <Reviews reviews={restaurant.reviews} restaurantId={restaurantId} />
+            <Reviews restaurantId={restaurantId} />
             {/* {user.name?<ReviewForm user={user}/>:''}          */}
         </div>
     )
