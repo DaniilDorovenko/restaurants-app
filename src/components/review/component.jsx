@@ -12,7 +12,7 @@ export const Review = ({ reviewId }) => {
       }
 
     const userId = review.userId;
-    const userName = useSelector(selectUserById(userId)).name;
+    // const userName = useSelector(selectUserById(userId)).name;
  
     return (
         <> {review ?

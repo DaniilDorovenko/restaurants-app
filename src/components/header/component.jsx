@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import { Button } from '../button/component';
 import { ModalContent } from '../modal-content/component';
 import { UserContext } from "../contexts/user";
+import { CartContainer } from "../cart/container";
 
 
 export const Header = () => {
@@ -23,6 +24,7 @@ export const Header = () => {
                 <ModalContent onClose={() => setShowModal(false)} />,
                 document.body
             )}
+            < CartContainer/>
         </header>
     )
 };
