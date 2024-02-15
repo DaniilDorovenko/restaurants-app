@@ -1,12 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { Button } from '../button/component';
 import { Counter } from "../counter/component";
-
-import { selectDishById } from "../../redux/entities/dish/selectors";
-import { selectIsLoading } from '../../redux/ui/requset';
-import { getDishById } from "../../redux/entities/dish/thunks/get-dishes";
 
 import {
     decrement,
@@ -17,36 +11,30 @@ import {
 import classNames from "classnames";
 import styles from "./styles.module.scss"
 
-export const Dish = ({ dishId }) => {
-    const [count, setCount] = useState(0);
+export const Dish = ({ dish }) => {
 
-    const [requestId, setRequestId] = useState();
+    if (!dish) {
+      return null
+    }
 
-    // const isLoading = useSelector(state => requestId && selectIsLoading(state, requestId));
+    const amount = useSelector((state) =>
+        selectDishAmountById(state, dish.id)
+    );
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        setRequestId(dispatch(getDishById(dishId)).requestId);
-    }, [dispatch, dishId]);
-
-    const amount = useSelector((state) =>
-        selectDishAmountById(state, dishId)
-    );
-
-    const dish = useSelector(selectDishById(dishId));
-
     return (<> {dish ? (
-        <div key={dishId}>
+        <div >
+          <>
             {dish.name && dish.name}
             {dish.price}
-            {dish.ingredients}
+            {dish.ingredients}</>
             <Counter
             decrement={() => {
-              dispatch(decrement(dishId));
+              dispatch(decrement(dish.id));
             }}
             increment={() => {
-              dispatch(increment(dishId));
+              dispatch(increment(dish.id));
             }}
             value={amount}
           />
