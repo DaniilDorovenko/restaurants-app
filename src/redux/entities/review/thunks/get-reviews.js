@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { selectReviewIds, selectReviewById } from "../selectors"; 
-// import { selectReviewByRestaurantId } from "../../redux/entities/restaurant/selectors";; 
+import { selectRestaurantReviewIds } from "../../restaurant/selectors";; 
 
 export const getReviews = createAsyncThunk(
     'reviews/getReviews', async () => {
@@ -18,13 +18,13 @@ export const getReviewById = createAsyncThunk(
         const result = await response.json();
         return result;
     },
-    // {
-    //     condition: (reviewId, { getState }) => {
-    //         const review = selectReviewById(reviewId)(getState()); 
-    //         return review ? false : true;
-    //     }
+    {
+        condition: (reviewId, { getState }) => {
+            const review = selectReviewById(reviewId)(getState()); 
+            return review ? false : true;
+        }
         
-    // }
+    }
 );
 
 export const getReviewsByRestaurantId = createAsyncThunk(
@@ -34,12 +34,12 @@ export const getReviewsByRestaurantId = createAsyncThunk(
         const result = await response.json();
         return result;
     },
-    {
-        // condition: (restaurantId, { getState }) => {
-        //     const reviews = selectReviewByRestaurantId(restaurantId)(getState()); 
-        //     return reviews ? false : true;
-        // }
-        
+        {
+    condition: (restaurantId, { getState }) => {
+        const restaurantRevieswIds = selectRestaurantReviewIds(restaurantId)(getState());
+        const reviewIds = selectReviewIds(getState());
+        return !restaurantRevieswIds.every((id) => reviewIds.includes(id))  
     }
+  }
 );
 
