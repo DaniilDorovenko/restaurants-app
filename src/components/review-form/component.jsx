@@ -1,7 +1,7 @@
-
 import { useReducer } from 'react';
 import { useContext } from "react";
 import { UserContext } from "../contexts/user";
+import { useCreateReviewMutation, useGetUsersQuery } from '../../redux/services/api';
 
 function reducer(state, action) {
     switch (action.type) {
@@ -27,12 +27,14 @@ function reducer(state, action) {
     throw Error('Unknown action: ' + action.type);
 }
 
+export const ReviewForm = (restaurantId) => {
+    const { user } = useContext(UserContext);
 
-export const ReviewForm = () => {
-    const {user} = useContext(UserContext);
+    const [createReview, { isLoading }] = useCreateReviewMutation();
+    const {data: users} = useGetUsersQuery();
 
     const initialState = {
-        name: user.name||'',
+        name: user.name || '',
         text: '',
         rating: 10,
     };
@@ -88,6 +90,19 @@ export const ReviewForm = () => {
                 onChange={handleRatingInputChange}
             />
             <label htmlFor="rating">{state.rating}</label>
+
+            <button
+                onClick={() => createReview({
+                    restaurantId,
+                    newReview: {
+                        userId: user.name ? user.name : users?.find(({ name }) => name === state.name).id,
+                        text: state.text,
+                        rating: state.rating
+                    }
+                }
+                )}>
+                Submit
+            </button>
         </div>
     )
 };

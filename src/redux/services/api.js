@@ -13,9 +13,9 @@ export const api = createApi({
         }),
         getMenu: builder.query({
             query: (restaurantId) => ({
-              url: `dishes?restaurantId=${restaurantId}`,
+                url: `dishes?restaurantId=${restaurantId}`,
             }),
-          }),
+        }),
         getRestaurants: builder.query({
             query: () => ({
                 url: "restaurants",
@@ -24,13 +24,27 @@ export const api = createApi({
         getReviews: builder.query({
             query: (restaurantId) => ({
                 url: `reviews?restaurantId=${restaurantId}`,
-              }),
             }),
+        }),
+        createReview: builder.mutation({
+            query: ({ restaurantId, newReview }) => ({
+                url: `review/${restaurantId}`,
+                method: "POST",
+                body: newReview,
+            }),
+            invalidatesTags: (result, _, { restaurantId }) => [
+                {
+                    type: "Review",
+                    id: restaurantId
+                },
+            ],
+        }),
         getUsers: builder.query({
             query: () => ({
                 url: "users",
             }),
         }),
+
     })
 })
 
@@ -39,5 +53,6 @@ export const {
     useGetRestaurantsQuery,
     useGetReviewsQuery,
     useGetUsersQuery,
-    useGetMenuQuery
+    useGetMenuQuery,
+    useCreateReviewMutation,
 } = api;
