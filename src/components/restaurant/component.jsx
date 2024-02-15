@@ -19,9 +19,9 @@ export const Restaurant = ({ restaurantId }) => {
     return (
         <div>
             <h1>{restaurant.name}</h1>
-            <Menu restaurantId={restaurant.id} />
-            {/* <Reviews restaurantId={restaurantId} /> */}
-            {/* {user.name ? <ReviewForm user={user} /> : ''} */}
+            <Menu restaurantId={restaurantId} />
+            <Reviews restaurantId={restaurantId} />
+            {user.name ? <ReviewForm user={user} /> : ''}
         </div>
     )
 };

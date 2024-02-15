@@ -22,10 +22,10 @@ export const api = createApi({
             }),
         }),
         getReviews: builder.query({
-            query: () => ({
-                url: "reviews"
+            query: (restaurantId) => ({
+                url: `reviews?restaurantId=${restaurantId}`,
+              }),
             }),
-        }),
         getUsers: builder.query({
             query: () => ({
                 url: "users",
