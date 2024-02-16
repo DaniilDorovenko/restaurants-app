@@ -1,5 +1,3 @@
-import { Layout } from '../components/layout/component';
-
 export const HomePage = () => {
 
     return (

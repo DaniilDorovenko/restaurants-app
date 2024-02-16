@@ -5,12 +5,20 @@ import { Provider } from "react-redux";
 import { UserContext } from "./components/contexts/user";
 
 import { RestaurantsPage } from "./pages/restaurants";
+import { RestaurantPage } from "./pages/restaurant";
 import { HomePage } from "./pages/home";
+import { ContactsPage } from "./pages/contacts";
+import { BasketPage } from "./pages/basket";
+import { ReviewsPage } from "./pages/reviews";
+import { MenuPage } from "./pages/menu";
+import { DishPage } from "./pages/dish";
+
 import { Layout } from "./components/layout/component";
 
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
-import { element } from "prop-types";
+
+
 
 export const App = () => {
   const [user, setUser] = useState({ name: '', email: '' });
@@ -19,20 +27,23 @@ export const App = () => {
     {
       path: '/', element: <Layout />, children: [
         { index: true, element: <HomePage />, },
-        { path: 'contacts', element: <Contacts />, },
-        { path: 'basket', element: <Basket />, },
+        { path: 'contacts', element: <ContactsPage />, },
+        { path: 'basket', element: <BasketPage />, },
         {
           path: 'restaurants', element: <RestaurantsPage />, children: [
             {
               path: ":restaurantId", element: <RestaurantPage />, children: [
                 {
-                  path: 'reviews', element: <Review />
+                  path: 'reviews', element: <ReviewsPage />
+                },
+                {
+                  path: 'menu', element: <MenuPage />
                 }
               ]
             },
           ]
         },
-        { path: ':dishId', element: <Dish />, }
+        { path: ':dishId', element: <DishPage />, }
       ]
     }
   ])
