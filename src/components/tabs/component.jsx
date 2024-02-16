@@ -13,7 +13,7 @@ export const Tabs = ({ onSelect }) => {
                         <Tab
                             key={id}
                             name={name}
-                            isActive={isActive}
+                            disabled={isActive}
                             onClick={() => onSelect(id)}
                         />
                     )}
