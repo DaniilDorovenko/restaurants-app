@@ -27,11 +27,13 @@ function reducer(state, action) {
     throw Error('Unknown action: ' + action.type);
 }
 
-export const ReviewForm = (restaurantId) => {
+export const ReviewForm = (restaurant) => {
     const { user } = useContext(UserContext);
 
     const [createReview, { isLoading }] = useCreateReviewMutation();
     const {data: users} = useGetUsersQuery();
+
+    const restaurantId = restaurant.restaurantId;
 
     const initialState = {
         name: user.name || '',
@@ -92,10 +94,11 @@ export const ReviewForm = (restaurantId) => {
             <label htmlFor="rating">{state.rating}</label>
 
             <button
-                onClick={() => createReview({
+                onClick={() => createReview(
+                    {
                     restaurantId,
                     newReview: {
-                        userId: user.name ? user.name : users?.find(({ name }) => name === state.name).id,
+                        userId: 'a304959a-76c0-4b34-954a-b38dbf310360',//user.name ? user.name : users?.find(({ name }) => name === state.name).id,
                         text: state.text,
                         rating: state.rating
                     }

@@ -25,6 +25,13 @@ export const api = createApi({
             query: (restaurantId) => ({
                 url: `reviews?restaurantId=${restaurantId}`,
             }),
+            providesTags: (result, _, restaurantId) =>
+                result
+                    .map(({ id }) => ({ type: "Review", id }))
+                    .concat(
+                        { type: "Review", id: "ALL" },
+                        { type: "Restaurant", id: restaurantId }
+                    ),
         }),
         createReview: builder.mutation({
             query: ({ restaurantId, newReview }) => ({
@@ -34,7 +41,7 @@ export const api = createApi({
             }),
             invalidatesTags: (result, _, { restaurantId }) => [
                 {
-                    type: "Review",
+                    type: "Restaurant",
                     id: restaurantId
                 },
             ],
