@@ -1,18 +1,17 @@
-import { Layout } from '../components/layout/component';
 import { Restaurant } from '../components/restaurant/component'
 import { Tabs } from "../components/tabs/component";
 
-import { useState, useEffect } from "react"
+import { useState} from "react"
 
 import { useGetRestaurantsQuery } from "../redux/services/api";
 
-export const RestaurantPage = () => {
+export const RestaurantsPage = () => {
     
     const [currentRestaurantId, setCurrentRestaurantId] = useState();
     const { isLoading,} = useGetRestaurantsQuery();
 
     return (
-        <Layout> {isLoading ? (
+        <> {isLoading ? (
             <div>Loading...</div>
         ) : (
             <>
@@ -20,7 +19,7 @@ export const RestaurantPage = () => {
                 {currentRestaurantId && <Restaurant restaurantId={currentRestaurantId} />}
             </>
         )}
-        </Layout>
+        </>
     )
 
 };
