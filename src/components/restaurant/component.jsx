@@ -25,18 +25,20 @@ export const Restaurant = ({ restaurantId, activeTab, setActiveTab }) => {
         <div>
             <h1>{restaurant.name}</h1>
             <NavLink to={`/restaurants/${restaurantId}/menu`}>
-                <Tab name='menu' onClick={() => {
-                    setActiveTab({ id: restaurantId, name: 'menu' });
-                    // navigate(`/restaurants/${restaurantId}/${activeTab.name}`, { replace: true });
-                }
-                    } />
+                {({ isActive }) => (
+                    <Tab name='menu' disabled={isActive} onClick={() => {
+                        setActiveTab({ id: restaurantId, name: 'menu' })
+                    }} />
+                )}
             </NavLink>
 
+
             <NavLink to={`/restaurants/${restaurantId}/reviews`}>
-                <Tab name='reviews' onClick={() => {
-                    setActiveTab({ id: restaurantId, name: 'reviews' });
-                    // navigate(`/restaurants/${restaurantId}/${activeTab.name}`, { replace: true });
+                {({ isActive }) => (
+                    <Tab name='reviews' disabled={isActive} onClick={() => {
+                        setActiveTab({ id: restaurantId, name: 'reviews' })
                     }} />
+                )}
             </NavLink>
 
             {(activeTab?.name == 'menu') && (activeTab?.id == restaurantId) && <Menu restaurantId={restaurantId} />}
