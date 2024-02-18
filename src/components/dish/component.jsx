@@ -22,19 +22,17 @@ export const Dish = ({ dishId }) => {
 
     const [requestId, setRequestId] = useState();
 
-    // const isLoading = useSelector(state => requestId && selectIsLoading(state, requestId));
+    const isLoading = useSelector(state => requestId && selectIsLoading(state, requestId));
 
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        setRequestId(dispatch(getDishById(dishId)).requestId);
-    }, [dispatch, dishId]);
 
     const amount = useSelector((state) =>
         selectDishAmountById(state, dishId)
     );
 
     const dish = useSelector(selectDishById(dishId));
+    
+    console.log(dish)
 
     return (<> {dish ? (
         <div key={dishId}>
