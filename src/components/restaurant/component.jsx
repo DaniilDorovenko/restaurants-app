@@ -41,8 +41,14 @@ export const Restaurant = ({ restaurantId, activeTab, setActiveTab }) => {
                 )}
             </NavLink>
 
-            {(activeTab?.name == 'menu') && (activeTab?.id == restaurantId) && <Menu restaurantId={restaurantId} />}
-            {(activeTab?.name == 'reviews') && (activeTab?.id == restaurantId) && <Reviews restaurantId={restaurantId} />}
+            {(activeTab?.name == 'menu') 
+            && (activeTab?.id == restaurantId) 
+            && <Menu restaurantId={restaurantId} />}
+
+            {(activeTab?.name == 'reviews') 
+            && (activeTab?.id == restaurantId) 
+            && <Reviews restaurantId={restaurantId} />}
+            
             {user.name && <ReviewForm restaurantId={restaurantId} />}
         </div>
     )

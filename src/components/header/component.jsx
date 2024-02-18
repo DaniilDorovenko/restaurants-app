@@ -19,7 +19,6 @@ export const Header = () => {
             <Link to="/">Home</Link>
             <Link to="/contacts">Contacts</Link>
             <Link to="/restaurants">Restaurants</Link>
-            <Link to="/dishes">Dishes</Link>
             <Link to="/basket">Basket</Link>
             <Button onClick={() => setShowModal(true)}>
                 Login

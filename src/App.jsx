@@ -33,17 +33,13 @@ export const App = () => {
           path: 'restaurants', element: <RestaurantsPage />, children: [
             {
               path: ":restaurantId", element: <RestaurantPage />, children: [
-                {
-                  path: 'reviews', element: <ReviewsPage />
-                },
-                {
-                  path: 'menu', element: <MenuPage />
-                }
+                { path: 'reviews', element: <ReviewsPage /> },
+                { path: 'menu', element: <MenuPage /> }
               ]
             },
           ]
         },
-        { path: ':dishId', element: <DishPage />, }
+        { path: 'dishes/:dishId', element: <DishPage />, }
       ]
     }
   ])
