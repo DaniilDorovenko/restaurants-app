@@ -12,3 +12,21 @@ export const userSlice = createSlice({
     },
 });
 
+// import { createSlice, createEntityAdapter  } from "@reduxjs/toolkit";
+
+// import { getUserById } from "./thunks/get-users";
+
+// const entityAdapter = createEntityAdapter();
+
+// export const userSlice = createSlice({
+//     name: 'user',
+//     extraReducers: (builder) => {
+//         builder
+//             .addCase(getUserById.fulfilled, (state, { payload }) => {
+//                 entityAdapter.upsertOne(state, payload);
+//             });
+//     }
+// });
+
+
+

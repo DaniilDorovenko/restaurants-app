@@ -1,32 +1,46 @@
-import { useSelector } from "react-redux";
 import { useState } from "react";
-import { Button } from '../button/component';
-import { selectDishById } from "../../redux/entities/dish/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { Counter } from "../counter/component";
+
+import {
+    decrement,
+    increment,
+    selectDishAmountById,
+} from "../../redux/ui/cart";
 
 import classNames from "classnames";
 import styles from "./styles.module.scss"
 
-export const Dish = ({ dishId }) => {
-    const [count, setCount] = useState(0);
-    const dish = useSelector((state) => selectDishById(state, dishId));
-    return (
-        <div key={dishId}>
-            {dish.name}
+export const Dish = ({ dish }) => {
+
+    if (!dish) {
+      return null
+    }
+
+    const amount = useSelector((state) =>
+        selectDishAmountById(state, dish.id)
+    );
+
+    const dispatch = useDispatch();
+
+    return (<> {dish ? (
+        <div >
+          <>
+            {dish.name && dish.name}
             {dish.price}
-            {dish.ingredients}
-            <Button onClick={() => {
-                if (count > 0) {
-                    setCount(count - 1);
-                };
-            }
-            } disabled={count === 0}>-</Button>
-            {count}
-            <Button onClick={() => {
-                if (count < 5) {
-                    setCount(count + 1);
-                };
-            }
-            } disabled={count === 5}>+</Button>
-        </div>
+            {dish.ingredients}</>
+            <Counter
+            decrement={() => {
+              dispatch(decrement(dish.id));
+            }}
+            increment={() => {
+              dispatch(increment(dish.id));
+            }}
+            value={amount}
+          />
+        </div>) : ('Loading'
+
+    )}</>
+
     );
 };

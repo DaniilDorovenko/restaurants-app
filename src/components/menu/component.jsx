@@ -1,14 +1,18 @@
 import { Dish } from '../dish/component';
 
-export const Menu = ({ menu }) => {
+import { useGetMenuQuery } from "../../redux/services/api";
 
-    return (
+export const Menu = ({ restaurantId }) => {
+
+    const { data: menu } = useGetMenuQuery(restaurantId);
+
+    if (menu) return (
         <div>
             <h3>Menu</h3>
             <ul>
-                {menu.map((dishId) => (
-                    <li key={'d' + dishId}>
-                        <Dish key={dishId} dishId={dishId} />
+                {menu.map((dish) => (
+                    <li>
+                        <Dish dish={dish} />
                     </li>
                 ))}
             </ul>

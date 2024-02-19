@@ -1,14 +1,22 @@
 import { Review } from "../review/component";
+import { useGetReviewsQuery } from "../../redux/services/api";
 
-export const Reviews = ({ reviews }) => {
+
+export const Reviews = ({ restaurantId }) => {
+
+    const { data: reviews } = useGetReviewsQuery(restaurantId);
+
+    if (!reviews) {
+        return null;
+    }
+
     return (
         <div>
             <h3>Reviews</h3>
             <ul>
-                {reviews.map((reviewId) => (
-                    <li key={'r' + reviewId}>
-                        <Review reviewId={reviewId}/>
-                       
+                {reviews.map((review) => (
+                    <li>
+                        <Review review={review} />
                     </li>
                 ))}
             </ul>

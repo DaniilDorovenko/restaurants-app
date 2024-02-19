@@ -1,15 +1,14 @@
-import { useSelector } from "react-redux";
-import { selectReviewById } from "../../redux/entities/review/selectors";
-import { selectUserById } from "../../redux/entities/user/selectors";
-
-export const Review = ({ reviewId }) => {
-    const review = useSelector((state) => selectReviewById(state, reviewId));
+export const Review = ({ review }) => {
 
     return (
-        <>
-            {useSelector((state) => selectUserById(state, review.userId)).name}
-            {review.text}
-            {review.rating}
+        <> {review ?
+            (
+                <>
+                    {/* {userName} */}
+                    {review.text}
+                    {review.rating}
+                </>
+            ) : ('Loading')}
         </>
     );
 };
