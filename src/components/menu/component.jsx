@@ -1,6 +1,7 @@
 import { Dish } from '../dish/component';
 
 import { useGetMenuQuery } from "../../redux/services/api";
+import { NavLink } from 'react-router-dom';
 
 export const Menu = ({ restaurantId }) => {
 
@@ -11,8 +12,10 @@ export const Menu = ({ restaurantId }) => {
             <h3>Menu</h3>
             <ul>
                 {menu.map((dish) => (
-                    <li>
-                        <Dish dish={dish} />
+                    <li key={dish.id}>
+                        <NavLink to={`/dishes/${dish.id}`}>
+                            <Dish dish={dish} />
+                        </NavLink>
                     </li>
                 ))}
             </ul>

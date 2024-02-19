@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useContext } from "react";
 import { createPortal } from 'react-dom';
 
+import { Link } from "react-router-dom";
+
 import { Button } from '../button/component';
 import { ModalContent } from '../modal-content/component';
 import { UserContext } from "../contexts/user";
@@ -14,6 +16,10 @@ export const Header = () => {
     return (
         <header>
             Header
+            <Link to="/">Home</Link>
+            <Link to="/contacts">Contacts</Link>
+            <Link to="/restaurants">Restaurants</Link>
+            <Link to="/basket">Basket</Link>
             <Button onClick={() => setShowModal(true)}>
                 Login
             </Button>
@@ -24,7 +30,7 @@ export const Header = () => {
                 <ModalContent onClose={() => setShowModal(false)} />,
                 document.body
             )}
-            < CartContainer/>
+            < CartContainer />
         </header>
     )
 };

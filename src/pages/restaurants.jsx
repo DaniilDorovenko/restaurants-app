@@ -5,9 +5,10 @@ import { useState} from "react"
 
 import { useGetRestaurantsQuery } from "../redux/services/api";
 
-export const RestaurantPage = () => {
+export const RestaurantsPage = () => {
     
     const [currentRestaurantId, setCurrentRestaurantId] = useState();
+    const [activeTab, setActiveTab] = useState();
     const { isLoading,} = useGetRestaurantsQuery();
 
     return (
@@ -15,8 +16,11 @@ export const RestaurantPage = () => {
             <div>Loading...</div>
         ) : (
             <>
-                <Tabs onSelect={setCurrentRestaurantId} />
-                {currentRestaurantId && <Restaurant restaurantId={currentRestaurantId} />}
+                <Tabs onSelect={setCurrentRestaurantId} setActiveTab={setActiveTab} activeTab={activeTab}/>
+                {currentRestaurantId && <Restaurant restaurantId={currentRestaurantId} 
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                 />}
             </>
         )}
         </>
