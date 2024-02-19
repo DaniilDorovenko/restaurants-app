@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRestaurants } from "../redux/entities/restaurant/thunks/get-restaurants";
 import { selectIsLoading } from '../redux/ui/requset';
+import { getUsers } from '../redux/entities/user/thunks/get-users';
 // import { selectRestaurantIds } from "../redux/entities/restaurant/selectors";
 
 export const RestaurantPage = () => {
@@ -20,6 +21,10 @@ export const RestaurantPage = () => {
 
     useEffect(() => {
         setRequestId(dispatch(getRestaurants()).requestId);
+    }, [dispatch]);
+
+    useEffect(() => {
+        setRequestId(dispatch(getUsers()).requestId);
     }, [dispatch]);
 
     return (
