@@ -1,32 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { normalizedUsers } from "../../../../materials/normalized-mock";
+
+import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
+
+import { getUserById, getUsers } from "./thunks/get-users";
+
+const entityAdapter = createEntityAdapter();
 
 export const userSlice = createSlice({
     name: 'user',
-    initialState: {
-        entities: normalizedUsers.reduce((acc, user) => {
-            acc[user.id] = user;
-            return acc;
-        }, {}),
-        ids: normalizedUsers.map(({ id }) => id),
-    },
+    initialState: entityAdapter.getInitialState(),
+    extraReducers: (builder) => {
+        builder
+            .addCase(getUserById.fulfilled, (state, { payload }) => {
+                entityAdapter.upsertOne(state, payload);
+            })
+            .addCase(getUsers.fulfilled, (state, { payload }) => {
+                entityAdapter.setAll(state, payload);
+            });
+    }
 });
-
-// import { createSlice, createEntityAdapter  } from "@reduxjs/toolkit";
-
-// import { getUserById } from "./thunks/get-users";
-
-// const entityAdapter = createEntityAdapter();
-
-// export const userSlice = createSlice({
-//     name: 'user',
-//     extraReducers: (builder) => {
-//         builder
-//             .addCase(getUserById.fulfilled, (state, { payload }) => {
-//                 entityAdapter.upsertOne(state, payload);
-//             });
-//     }
-// });
 
 
 

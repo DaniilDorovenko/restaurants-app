@@ -13,15 +13,21 @@ import styles from "./styles.module.scss"
 
 export const Dish = ({ dish }) => {
 
-    if (!dish) {
-      return null
-    }
+    const [requestId, setRequestId] = useState();
+
+    const isLoading = useSelector(state => requestId && selectIsLoading(state, requestId));
+
+    const dispatch = useDispatch();
+
 
     const amount = useSelector((state) =>
         selectDishAmountById(state, dish.id)
     );
 
-    const dispatch = useDispatch();
+
+    const dish = useSelector(selectDishById(dishId));
+    
+
 
     return (<> {dish ? (
         <div >
